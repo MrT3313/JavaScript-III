@@ -2,19 +2,20 @@
 // === GameObject === 
     function GameObject(gameAttributes) {
         // -- // SET INHERITANCE
-        teamObject.call(this, playerAttributes);
+        // teamObject.call(this, playerAttributes);
         
         // -- // SET ATTRIBUTES
         this.date = gameAttributes.date;
         this.stadium = gameAttributes.stadium;
         this.weather = gameAttributes.weather;
+        this.gameLength = gameAttributes.gameLength;
     }
 
 // === TeamObject === 
     function TeamObject(teamAttributes) {
         this.teamName = teamAttributes.teamName;
         this.city = teamAttributes.city;
-        this.rosterMax = 5;
+        this.rosterMax = 6;
 
     }
 
@@ -47,15 +48,30 @@
         }
 
 // === EventObject ===
-        function EventObject(eventAttributes) {
-            PlayerObject.call(this, eventAttributes);
-        }
+function EventObject(eventAttributes) {
+    PlayerObject.call(this, eventAttributes);
 
+    this.pitcherSpeed = eventAttributes.pitcherSpeed;
+    this.batterPower = eventAttributes.batterPower;
+    this.fielderSkill = eventAttributed.fielderSkill;
+}
 
 //**// METHODS
 // -- // Regular Methods
 
 // -- // PROTOTYPE Methods
-    Player.prototype.randNum = function() { 
+    EventObject.prototype.randNum = function() { 
+        return Math.random()
+    }
 
+    EventObject.prototype.activeSpeed = function(speedThreshold) {
+        return this.speed * this.randNum
+    }
+
+    EventObject.prototype.activePower = function(powerThreshold) {
+        return this.power * this.randNum
+    }
+
+    EventObject.prototype.activeSkill = function(skillThreshold) {
+        return this.skill * this.randNum
     }
