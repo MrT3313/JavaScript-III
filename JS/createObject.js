@@ -29,6 +29,9 @@ const todaysGame = new GameObject({
     });
 
 //**// Create Players
+    // Create Array of Players
+        const playersArray = [];
+
     // -- // Player 1
     const player1 = new PlayerObject({
         playerName: 'Babe',

@@ -1,12 +1,15 @@
-// notes:
-    // -- // EVENT does not know about GAME 
-    EventObject.prototype = Object.create(GameObject.prototype);
+//**// WHOS INVOLVED
+    // -- // Create League & Teams Array
+        let leagueTeams = [];
+        let activeTeams = [];
+    // -- // Create League & Players Array
+        let leaguePlayers = [];
+        let activePlayers = [];
 
-    // -- // -- // TO DO --> introduce them
-
-//**// Create Event 
-// -- // Pitch #1
-const pitch1 = new EventObject({
-
-});
+//**// Create Game Array
+    let gameArray = [];
     
+
+//**// Create Fielders Array
+    let fieldersArray = [];
+
