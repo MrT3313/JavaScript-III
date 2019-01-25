@@ -40,6 +40,9 @@
         }
     }
 
+// -- // -- // TEST PITCH OBJECT
+
+
 // -- // AtBatObject
 class AtBatObject extends HalfInningObject {
     constructor(atBatAttributes) {
@@ -91,11 +94,18 @@ class HalfInningObject extends GameObject {
 }
 
 // -- // GameObject
-class HalfInningObject extends GameObject {
-    constructor (halfInningAttributes) {
-        super(halfInningAttributes);
-    // -- // GameObject ATTRIBUTES  
+class GameObject extends GameObject {
+    constructor (gameAttributes) {
+        super(gameAttributes);
+    // -- // GameObject ATTRIBUTES
+        this.date = new Date();
+        this.stadium = gameAttributes.Stadium;
+        this.weather = gameAttributes.weather;
+
     }
 
     // -- // HalfInningObject METHODS
+    coinToss () {
+        // figure out who is home and away
+    }
 }
