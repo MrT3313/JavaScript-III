@@ -1,9 +1,8 @@
 //**// WHOS INVOLVED
-    // -- // Create League & Teams Array
-        let leagueTeams = [];
-        let activeTeams = [];
+
+        // let activeTeams = []; moved into constructor
     // -- // Create League & Players Array
-        let leaguePlayers = [];
+
         let activePlayers = [];
 
 //**// Create Game Array

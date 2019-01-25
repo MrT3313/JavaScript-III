@@ -47,15 +47,15 @@ const todaysGame = new GameObject({
 
     // -- // Player 2
     const player2 = new PlayerObject({
-        playerName: 'Barry',
-        playerLastName: 'Bonds',
+        playerName: 'Pedro',
+        playerLastName: 'Martinez',
         jerseyNum: 25,
-        position: 'outfield',
+        position: 'pitcher',
 
         // event threshold attributes
-        speed: .2,
-        power: .9,
-        skill: .7
+        speed: .9,
+        power: .6,
+        skill: .4
     });
 
     // -- // Player 3

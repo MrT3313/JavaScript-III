@@ -1,18 +1,35 @@
-== CREATE EMPTY ARRAYS ==
-    C) leagueTeams          // pool of all created team objects
-    D) activeTeams              // what 2 teams are participating in this game?  
-    E) leaguePlayers        // pool of all created players
-    F) activePlayers            // what players are available 
-    
-    G) gameArray            // pool of all created Events
+== STRUCTURAL START
+    A) *CREATE* leagueTeams @teamObject constructor PUSH leagueTeams                -- array of all available teams
+    B) *CREATE* leaguePlayers @playerObject constructor PUSH leaguePlayers          -- array of all available players 
+== GAME LOGIC ==
+    C) Game Initiation Logic
+        IF (gameType === simulation)
+            B.1) activeTeams = RedSox / Yankees
+        IF (gameType === singlePlayer)
+            B.2)    *USER* = homeTeam
+                    *USER* = user selects team
+                    *SIMULATION* awayTeam = random selection
+        IF (gameType === multiPlayer)
+            B.3)    rocks / paper / sizzors game --> who is home (w/ first pick) & who is away
+    D) Create Todays Game
+    E) Draft Teams
+        E.1) Filter Pitchers
+        E.2) Filter Infielders
+        E.3) Filter Outfielders
+    F) Create HalfInningObject
+        G)  Create AtBatObject
+            Batter 1 --> push atBarResult to HalfInningObject.atBatsArray
+            Batter n --> push atBarResult to HalfInningObject.atBatsArray
+                H) Create PitchObject
+                    Pitch 1 --> push pitchResult to AtBatObject.pitchesArray
+                            --> call atBatObject.updatePitchCount
+                    Pitch n --> push pitchResult to AtBatObject.pitchesArray
+                            --> call atBatObject.updatePitchCount
+                                --> call AtBatObject.atBatResult
 
 
-== WHOS INVOLVED ==
-    A) Create Team Objects >= 2
-    B) Create Player Objects >= 12
-        >= 2 Pitchers
-        >= 4 Infielders
-        >= 6 Outfielders
+
+
 
 == GAME LOGIC ==
     3) SET DRAFT BOARD
