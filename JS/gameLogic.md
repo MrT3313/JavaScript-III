@@ -1,4 +1,14 @@
-== STRUCTURAL START
+== ReadMe == 
+
+    Hello! 
+
+    -This game was inspired by Gabe Samaniego.
+
+    -Baseball Simulation 
+        -Leverage inheritance and the inherently nested nature of sports to practice
+        JS CLASSES
+
+== STRUCTURAL START ==
     A) *CREATE* leagueTeams @teamObject constructor PUSH leagueTeams                -- array of all available teams
     B) *CREATE* leaguePlayers @playerObject constructor PUSH leaguePlayers          -- array of all available players 
 == GAME LOGIC ==
@@ -13,10 +23,11 @@
             B.3)    rocks / paper / sizzors game --> who is home (w/ first pick) & who is away
     D) Create Todays Game
     E) Draft Teams
+    F) Draft Players
         E.1) Filter Pitchers
         E.2) Filter Infielders
         E.3) Filter Outfielders
-    F) Create HalfInningObject
+    G) Create HalfInningObject
         G)  Create AtBatObject
             Batter 1 --> push atBarResult to HalfInningObject.atBatsArray
             Batter n --> push atBarResult to HalfInningObject.atBatsArray

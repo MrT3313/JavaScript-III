@@ -106,6 +106,7 @@ class GameObject {
         this.stadium = gameAttributes.stadium;
         this.weather = gameAttributes.weather;
         this.activeTeams = gameAttributes.activeTeams;
+        this.activeRosters = gameAttributes.activeRosters;
     }
 
     // -- // HalfInningObject METHODS
@@ -196,6 +197,20 @@ class TeamObject {
         skill: .4
     });
     //console.log(player2);
+
+        // -- // ADD PITCHER
+        const addPITCHER = new PlayerObject({
+            playerName: 'thisguy',
+            playerLastName: 'thisguy',
+            jerseyNum: 89,
+            position: 'pitcher',
+    
+            // event threshold attributes
+            speed: .2,
+            power: .2,
+            skill: .2
+        });
+        //console.log(player2);
 
     // -- // Player 3
     const player3 = new PlayerObject({
@@ -336,78 +351,88 @@ class TeamObject {
     //console.log(player12);
     //console.log(leaguePlayers)
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
-
-
-
-
-// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
-// ORGANIZED FOR QUOKKA
-// move to --> gameSimulation.js
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** 
 //**// GAME LOGIC
-    // -D- // Create GAME OBJECT
+// -- // -D- // Create GAME OBJECT
     const todaysGame = new GameObject({
         gameType: 'simulation',
-        stadium: 'Fenway',
-        weather: 'snow',
+        stadium: '',
+        weather: '',
         activeTeams: {
-            homeTeam: 'RedSox',
-            awayTeam: 'Yankees'
+            homeTeam: '', // redsox
+            awayTeam: '' // yankees
+        },
+        activeRosters: {
+            homeTeamRoster: [],
+            awayTeamRoster: []
         }
     });
     console.log(todaysGame);
-    
 
+    // -- // -E- // DRAFT TEAMS
+    let draftTeamsArray = leagueTeams.map((team) => {
+        return {'teamName': team.teamName, 'city': team.city};
+    })
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-    //console.log(leagueTeams[Math.round(Math.random() * leagueTeams.length)])
-    console.log(todaysGame.activeTeams.homeTeam = leagueTeams[Math.round(Math.random() * leagueTeams.length)])
-    console.log(todaysGame.activeTeams.homeTeam)
-    console.log(leagueTeams)
-    console.log(leagueTeams.indexOf(todaysGame.activeTeams.homeTeam))
-
-    function draftTeams(todaysGame, leagueTeams) {
+    function draftTeams(todaysGame, draftTeamsArray) {
         // set home team
-        todaysGame.activeTeams.homeTeam = leagueTeams[Math.round(Math.random() * leagueTeams.length)];
-
-            // look up home team array in leagueTeams
-            console.log(leagueTeams.indexOf(todaysGame.activeTeams.homeTeam));
-
+        todaysGame.activeTeams.homeTeam = draftTeamsArray[Math.round(Math.random() * draftTeamsArray.length)];        
+            // remove homeTeam from draftTeamsArray
+            draftTeamsArray.splice(draftTeamsArray.indexOf(todaysGame.activeTeams.homeTeam),1);
+                console.log(draftTeamsArray);
         // set away team
-        // -- // use IF logic to ensure same team is not selected twice
-        todaysGame.activeTeams.awayTeam = leagueTeams[Math.round(Math.random() * leagueTeams.length)];
+        todaysGame.activeTeams.awayTeam = draftTeamsArray[Math.round(Math.random() * draftTeamsArray.length)];
+            // remove homeTeam from draftTeamsArray
+            draftTeamsArray.splice(draftTeamsArray.indexOf(todaysGame.activeTeams.awayTeam),1);
+            console.log(draftTeamsArray);
+        return draftTeamsArray;
+    };    
+    // CALL DRAFT FUNCTION
+    draftTeams(todaysGame, draftTeamsArray);
+    todaysGame
+    draftTeamsArray
 
-            // look up home team array in leagueTeams
-            console.log(leagueTeams.indexOf(todaysGame.activeTeams.awayTeam));
+    // -- // -E- // DRAFT PLAYERS
+    let draftPlayersArray = leaguePlayers.map((player) => {
+        return {    playerName: player.playerName,
+                    playerLastName: player.playerLastName,
+                    jerseyNum: player.jerseyNum,
+                    position: player.position,
+                    speed: player.speed,
+                    power: player.power, 
+                    skill: player.skill     }
+    });
+    
+    // -- // -- // filter pitchers
+        let draftPitcherArray = draftPlayersArray.filter(player => player.position === 'pitcher')
+            draftPitcherArray 
 
-    }
+    // -- // -- // filter infielders
+        let draftInfieldArray = draftPlayersArray.filter(player => player.position === 'infield')
+            draftInfieldArray
+    
+    // -- // -- // filter outfielders
+            let draftOutfieldArray = draftPlayersArray.filter(player => player.position === 'outfield')
+            draftOutfieldArray
+    
 
-    console.log(draftTeams(todaysGame, leagueTeams))
+            console.log(draftPitcherArray.length)
+            console.log(Math.random())
+            console.log(draftPitcherArray[Math.round(Math.random() * draftPitcherArray.Length)])
+
+    // -- // -- // -- // DRAFT!
+
+    console.log(todaysGame)
 
 
-
-    console.log(leaguePlayers.filter(player => player.position === 'pitcher').length);
-    console.log(leaguePlayers.filter(player => player.position === 'infield').length);
-    console.log(leaguePlayers.filter(player => player.position === 'outfield').length)
-    function draftTeams() {
-        // DRAFT PITCHERS
-            leaguePlayers.filter(player => player.position === 'pitcher').forEach((player) => {
-
-            })
-        // DRAFT INFIELDERS
-
-        // DRAFT OUTFIELDERS
+    function draftPlayers(todaysGame, draftPitcherArray) {
+        // home team pick
+            todaysGame.activeRosters.homeTeamRoster.push(
+                draftPitcherArray[Math.round(Math.random() * draftPitcherArray.length)]
+            )
     };
+
+    draftPlayers()
+    
+
+
