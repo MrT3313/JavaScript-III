@@ -422,17 +422,7 @@ class TeamObject {
 
     // -- // -- // -- // DRAFT!
 
-    console.log(todaysGame)
 
-
-    function draftPlayers(todaysGame, draftPitcherArray) {
-        // home team pick
-            todaysGame.activeRosters.homeTeamRoster.push(
-                draftPitcherArray[Math.round(Math.random() * draftPitcherArray.length)]
-            )
-    };
-
-    draftPlayers()
     
 
 
