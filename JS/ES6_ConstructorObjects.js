@@ -105,8 +105,17 @@ class GameObject {
         this.gameType = gameAttributes.gameType;
         this.stadium = gameAttributes.stadium;
         this.weather = gameAttributes.weather;
-        this.activeTeams = gameAttributes.activeTeams;
-        this.activeRosters = gameAttributes.activeRosters;
+        this.activeTeams    =   {   homeTeam: '', awayTeam: ''  };
+        this.activeRosters  =   {   homeRoster: [], awayRoster: []  };
+
+    }
+
+    // activeTeams () {
+
+    // }
+
+    activeRosters () {
+
     }
 
     // -- // HalfInningObject METHODS
@@ -142,6 +151,7 @@ class TeamObject {
         leagueTeams.push(this);
     }
 }
+
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
 //**// CREATE TEAM OBJECTS
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
@@ -198,19 +208,19 @@ class TeamObject {
     });
     //console.log(player2);
 
-        // -- // ADD PITCHER
-        const addPITCHER = new PlayerObject({
-            playerName: 'thisguy',
-            playerLastName: 'thisguy',
-            jerseyNum: 89,
-            position: 'pitcher',
-    
-            // event threshold attributes
-            speed: .2,
-            power: .2,
-            skill: .2
-        });
-        //console.log(player2);
+    // -- // ADD PITCHER
+    // const addPITCHER = new PlayerObject({
+    //     playerName: 'thisguy',
+    //     playerLastName: 'thisguy',
+    //     jerseyNum: 89,
+    //     position: 'pitcher',
+
+    //     // event threshold attributes
+    //     speed: .2,
+    //     power: .2,
+    //     skill: .2
+    // });
+    //console.log(player2);
 
     // -- // Player 3
     const player3 = new PlayerObject({
@@ -354,75 +364,222 @@ class TeamObject {
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** 
 //**// GAME LOGIC
 // -- // -D- // Create GAME OBJECT
-    const todaysGame = new GameObject({
-        gameType: 'simulation',
-        stadium: '',
-        weather: '',
-        activeTeams: {
-            homeTeam: '', // redsox
-            awayTeam: '' // yankees
-        },
-        activeRosters: {
-            homeTeamRoster: [],
-            awayTeamRoster: []
+    // -- // Function
+        const makeGame = function (var1, var2, var3) {
+        //    gameType: var1, stadium: var2, weather: var3, activeTeams: {homeTeam: '', awayTeam: ''}, activeRosters: {homeTeamRoster: [],awayTeamRoster: []}
         }
-    });
-    console.log(todaysGame);
-
-    // -- // -E- // DRAFT TEAMS
-    let draftTeamsArray = leagueTeams.map((team) => {
-        return {'teamName': team.teamName, 'city': team.city};
-    })
-
-    function draftTeams(todaysGame, draftTeamsArray) {
-        // set home team
-        todaysGame.activeTeams.homeTeam = draftTeamsArray[Math.round(Math.random() * draftTeamsArray.length)];        
-            // remove homeTeam from draftTeamsArray
-            draftTeamsArray.splice(draftTeamsArray.indexOf(todaysGame.activeTeams.homeTeam),1);
-                console.log(draftTeamsArray);
-        // set away team
-        todaysGame.activeTeams.awayTeam = draftTeamsArray[Math.round(Math.random() * draftTeamsArray.length)];
-            // remove homeTeam from draftTeamsArray
-            draftTeamsArray.splice(draftTeamsArray.indexOf(todaysGame.activeTeams.awayTeam),1);
-            console.log(draftTeamsArray);
-        return draftTeamsArray;
-    };    
-    // CALL DRAFT FUNCTION
-    draftTeams(todaysGame, draftTeamsArray);
-    todaysGame
-    draftTeamsArray
-
-    // -- // -E- // DRAFT PLAYERS
-    let draftPlayersArray = leaguePlayers.map((player) => {
-        return {    playerName: player.playerName,
-                    playerLastName: player.playerLastName,
-                    jerseyNum: player.jerseyNum,
-                    position: player.position,
-                    speed: player.speed,
-                    power: player.power, 
-                    skill: player.skill     }
-    });
     
-    // -- // -- // filter pitchers
-        let draftPitcherArray = draftPlayersArray.filter(player => player.position === 'pitcher')
-            draftPitcherArray 
+    // -- // Set Variables
+        var1 = 'simulation' // gameType
+        var2 = 'Fenway' // stadium
+        var3 = 'Snow' // weather
 
-    // -- // -- // filter infielders
-        let draftInfieldArray = draftPlayersArray.filter(player => player.position === 'infield')
-            draftInfieldArray
-    
-    // -- // -- // filter outfielders
-            let draftOutfieldArray = draftPlayersArray.filter(player => player.position === 'outfield')
-            draftOutfieldArray
-    
+    // -- // Call Function
+        // -- // -- // Function currently not working
+        const todaysGame = new GameObject({
+            gameType: 'simulation', stadium: 'Fenway', weather: 'Snow'
+        });  
 
+    // -- // Check Function Call
+        console.log(todaysGame);
+// -- ** -- ** -- END
+
+// -- // -E- // DRAFT TEAMS
+    // -- // MAP Necessary Arrays
+        let draftTeamsArray = leagueTeams.map((team) => {
+            return team;
+        })        
+        console.log(leagueTeams.length)
+        console.log(draftTeamsArray.length)
+        draftTeamsArray
+
+    // -- // FUNCTION
+        function draftTeams(gameObject, draftArray) {
+            // set home team & add to GameObject AciveTeams
+            console.log(draftArray.length) 
+            gameObject.activeTeams.homeTeam = draftArray[Math.floor(Math.random() * draftArray.length)];        
+                // remove homeTeam from draftArray
+                draftArray.splice(draftArray.indexOf(gameObject.activeTeams.homeTeam),1);
+                console.log(draftArray.length);
+            
+            // set away team & add to GameObject AciveTeams
+            console.log(draftArray.length) 
+            gameObject.activeTeams.awayTeam = draftArray[Math.floor(Math.random() * draftArray.length)];
+                // remove homeTeam from draftArray
+                draftArray.splice(draftArray.indexOf(gameObject.activeTeams.awayTeam),1);
+                console.log(draftArray.length) 
+        }
+
+    // -- // Call Function
+        draftTeams(todaysGame, draftTeamsArray)
+    // -- // Check Function Call
+        console.log(todaysGame)
+        console.log(todaysGame.activeTeams.homeTeam)
+        console.log(todaysGame.activeTeams.awayTeam)
+// -- ** -- ** -- END
+
+// -- // -F- // DRAFT PLAYERS
+        // -- // MAP Necessary Arrays
+            let draftPlayersArray = leaguePlayers.map((player) => {
+                return player
+            });
+            console.log(leaguePlayers.length)
+            console.log(draftPlayersArray.length)
+            draftPlayersArray
+    
+        // -- // SET VARIABLES
+            //  maxPitchers = 1;
+            //  maxInfielders = 2;
+            //  maxOutfielders = 3;
+        
+        // -- // FUNCTION
+        // -- // -- // DRAFT PITCHERS
+        // -- // -- // -- Filter Pitchers
+            let draftPitcherArray = draftPlayersArray.filter(player => player.position === 'pitcher')
             console.log(draftPitcherArray.length)
-            console.log(Math.random())
-            console.log(draftPitcherArray[Math.round(Math.random() * draftPitcherArray.Length)])
 
-    // -- // -- // -- // DRAFT!
+        // -- // -- // -- Function
+            function draftPitchers (gameObject, pitchersArray) {
+                let counter = 0
+                while ( 
+                    counter < 1
+                    // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.homeTeam.rosterMax && 
+                    // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.awayTeam.rosterMax     
+                )
+                {
+                    // -- // HOME Team Selection
+                    let chosenPlayerHOME = pitchersArray[Math.floor(Math.random() * pitchersArray.length)];
+                        console.log(chosenPlayerHOME)
+
+                        // push player onto FRONT of array
+                        console.log(gameObject)
+                        gameObject.activeRosters.homeRoster.unshift(chosenPlayerHOME)
+                        console.log(gameObject.activeRosters.homeRoster.length);
+
+                        // remove player from pitchersArray
+                        pitchersArray.splice(pitchersArray.indexOf(gameObject.activeRosters.homeRoster[0]),1)
+                            console.log(pitchersArray.length)
+                    
+                    // -- // AWAY Team Selection
+                    let chosenPlayerAWAY = pitchersArray[Math.floor(Math.random() * pitchersArray.length)];
+                        console.log(chosenPlayerAWAY)
+
+                        // push player onto FRONT of array
+                        gameObject.activeRosters.awayRoster.unshift(chosenPlayerAWAY)
+                        console.log(gameObject.activeRosters.awayRoster.length);
+                    
+                        // remove player from pitchersArray
+                        pitchersArray.splice(pitchersArray.indexOf(gameObject.activeRosters.awayRoster[0]),1)
+                            console.log(pitchersArray.length)
+                    // -- // Increment Counter
+                    counter
+                    ++counter
+                    counter
+                }
+            };   
+
+            // -- // -- // CALL FUNCTION
+                draftPitchers (todaysGame, draftPitcherArray);
+            // -- // Check Function Call
+                console.log(todaysGame.activeRosters.homeRoster)
+                console.log(todaysGame.activeRosters.awayRoster)
+
+        // -- // -- // DRAFT INFIELDERS
+            // -- // -- // -- Filter Infielders
+            let draftInfieldArray = draftPlayersArray.filter(player => player.position === 'infield')
+            console.log(draftInfieldArray.length)
+
+            // -- // -- // -- Function
+            function draftInfielders (gameObject, infieldersArray) {
+                let counter = 0
+                while ( 
+                    counter < 2
+                    // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.homeTeam.rosterMax && 
+                    // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.awayTeam.rosterMax     
+                )
+                {
+                    // -- // HOME Team Selection
+                    let chosenPlayerHOME = infieldersArray[Math.floor(Math.random() * infieldersArray.length)];
+                        console.log(chosenPlayerHOME)
+
+                        // push player onto FRONT of array
+                        gameObject.activeRosters.homeRoster.unshift(chosenPlayerHOME)
+                        console.log(gameObject.activeRosters.homeRoster.length);
+
+                        // remove player from infieldersArray
+                        infieldersArray.splice(infieldersArray.indexOf(gameObject.activeRosters.homeRoster[0]),1)
+                            console.log(infieldersArray.length)
+                    
+                    // -- // AWAY Team Selection
+                    let chosenPlayerAWAY = infieldersArray[Math.floor(Math.random() * infieldersArray.length)];
+                        console.log(chosenPlayerAWAY)
+
+                        // push player onto FRONT of array
+                        gameObject.activeRosters.awayRoster.unshift(chosenPlayerAWAY)
+                        console.log(gameObject.activeRosters.awayRoster.length);
+                    
+                        // remove player from infieldersArray
+                        infieldersArray.splice(infieldersArray.indexOf(gameObject.activeRosters.awayRoster[0]),1)
+                            console.log(infieldersArray.length)
+                    // -- // Increment Counter
+                    ++counter
+                }
+            }; 
+            // -- // -- // CALL FUNCTION
+            draftInfielders (todaysGame, draftInfieldArray);
+            // -- // Check Function Call
+            console.log(todaysGame.activeRosters.homeRoster)
+            console.log(todaysGame.activeRosters.awayRoster)
+            
+        // -- // -- // DRADFT OUTFIELDERS
+            // -- // -- // -- Filter Infielders
+            let draftOutfieldArray = draftPlayersArray.filter(player => player.position === 'outfield')
+            console.log(draftOutfieldArray.length)
+            // -- // -- // -- Function
+            function draftOutfielders (gameObject, draftOutfieldArray) {
+                let counter = 0
+                while ( 
+                    counter < 3
+                    // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.homeTeam.rosterMax && 
+                    // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.awayTeam.rosterMax     
+                )
+                {
+                    // -- // HOME Team Selection
+                    let chosenPlayerHOME = draftOutfieldArray[Math.floor(Math.random() * draftOutfieldArray.length)];
+                        console.log(chosenPlayerHOME)
+
+                        // push player onto FRONT of array
+                        gameObject.activeRosters.homeRoster.unshift(chosenPlayerHOME)
+                        console.log(gameObject.activeRosters.homeRoster.length);
+
+                        // remove player from draftOutfieldArray
+                        draftOutfieldArray.splice(draftOutfieldArray.indexOf(gameObject.activeRosters.homeRoster[0]),1)
+                            console.log(draftOutfieldArray.length)
+                    
+                    // -- // AWAY Team Selection
+                    let chosenPlayerAWAY = draftOutfieldArray[Math.floor(Math.random() * draftOutfieldArray.length)];
+                        console.log(chosenPlayerAWAY)
+
+                        // push player onto FRONT of array
+                        gameObject.activeRosters.awayRoster.unshift(chosenPlayerAWAY)
+                        console.log(gameObject.activeRosters.awayRoster.length);
+                    
+                        // remove player from draftOutfieldArray
+                        draftOutfieldArray.splice(draftOutfieldArray.indexOf(gameObject.activeRosters.awayRoster[0]),1)
+                            console.log(draftOutfieldArray.length)
+                    // -- // Increment Counter
+                    ++counter
+                }
+            }; 
+            // -- // -- // CALL FUNCTION
+            draftOutfielders (todaysGame, draftOutfieldArray);
+            // -- // Check Function Call
+            console.log(todaysGame.activeRosters.homeRoster)
+            console.log(todaysGame.activeRosters.awayRoster)   
 
 
+            console.log(todaysGame);
+
+            // -- ** -- ** -- END   
     
-
 
