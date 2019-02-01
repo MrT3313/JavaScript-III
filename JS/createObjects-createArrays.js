@@ -1,38 +1,41 @@
-// notes:
-    // -- // PITCHER does not know about PLAYER 
-    // -- // BATTER does not know about PLAYER 
-    // -- // FIELDER does not know about PLAYER 
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
+//**// STRUCTURAL ARRAYS
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
+let leagueTeams = [];
+let leaguePlayers = [];
 
-    // -- // -- // TO DO --> introduce them
-    PitcherObject.prototype = Object.create(PlayerObject.prototype);
-    BatterObject.prototype = Object.create(PlayerObject.prototype);
-    FielderObject.prototype = Object.create(PlayerObject.prototype);
+let homeBattingOrderIndex = 0
+let awayBattingOrderIndex = 0
 
-//**// Create Game
-const todaysGame = new GameObject({
-    date: new Date(),
-    stadium: 'fenway',
-    weather: 'snow'
-});
-
-//**// Create Teams
-// -- // Team 1
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
+//**// CREATE TEAM OBJECTS
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
+// -1- // Team 1
     const RedSox = new TeamObject({
         teamName: 'RedSox',
         city: 'Boston',
     });
-
-// -- // Team 2
+// -2- // Team 2
     const Yankees = new TeamObject({
         teamName: 'Yankees',
         city: 'New York',
     });
+// -3- // Team 3
+    const Cubs = new TeamObject({
+        teamName: 'Cubs',
+        city: 'Chicago',
+    });
+// -4- // Team 4
+    const Dodgers = new TeamObject({
+        teamName: 'Dodgers',
+        city: 'LA',
+    });
+    // console.log(leagueTeams)
 
-//**// Create Players
-    // Create Array of Players
-        const playersArray = [];
-
-    // -- // Player 1
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
+//**// CREATE PLAYER OBJECTS
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
+// -1- // Player 1
     const player1 = new PlayerObject({
         playerName: 'Babe',
         playerLastName: 'Ruth',
@@ -44,8 +47,9 @@ const todaysGame = new GameObject({
         power: .7,
         skill: .8
     });
+    //console.log(player1);
 
-    // -- // Player 2
+// -2- // Player 2
     const player2 = new PlayerObject({
         playerName: 'Pedro',
         playerLastName: 'Martinez',
@@ -57,8 +61,9 @@ const todaysGame = new GameObject({
         power: .6,
         skill: .4
     });
+    //console.log(player2);
 
-    // -- // Player 3
+// -3- // Player 3
     const player3 = new PlayerObject({
         playerName: 'David',
         playerLastName: 'Ortiz',
@@ -70,8 +75,9 @@ const todaysGame = new GameObject({
         power: .8,
         skill: .6
     });
+    //console.log(player3);
 
-    // -- // Player 4
+// -4- // Player 4
     const player4 = new PlayerObject({
         playerName: 'Jason',
         playerLastName: 'Varitek',
@@ -83,8 +89,9 @@ const todaysGame = new GameObject({
         power: .7,
         skill: .5
     });
+    //console.log(player4);
 
-    // -- // Player 5
+// -5- // Player 5
     const player5 = new PlayerObject({
         playerName: 'Derek',
         playerLastName: 'Jeter',
@@ -96,8 +103,9 @@ const todaysGame = new GameObject({
         power: .6,
         skill: .9
     });
+    //console.log(player5);
 
-    // -- // Player 6
+// -6- // Player 6
     const player6 = new PlayerObject({
         playerName: 'Reed',
         playerLastName: 'Turgeon',
@@ -109,8 +117,9 @@ const todaysGame = new GameObject({
         power: .5,
         skill: .5
     });
+    //console.log(player6);
 
-    // -- // Player 7
+// -7- // Player 7
     const player7 = new PlayerObject({
         playerName: 'Manny',
         playerLastName: 'Ramirez',
@@ -122,8 +131,9 @@ const todaysGame = new GameObject({
         power: .8,
         skill: .6
     });
+    //console.log(player7);
 
-    // -- // Player 8
+// -8- // Player 8
     const player8 = new PlayerObject({
         playerName: 'Ted',
         playerLastName: 'Williams',
@@ -135,8 +145,9 @@ const todaysGame = new GameObject({
         power: .7,
         skill: .5
     });
+    //console.log(player8);
 
-    // -- // Player 9
+// -9- // Player 9
     const player9 = new PlayerObject({
         playerName: 'Mike',
         playerLastName: 'Trout',
@@ -148,8 +159,9 @@ const todaysGame = new GameObject({
         power: .8,
         skill: .8
     });
+    //console.log(player9);
 
-    // -- // Player 10
+// -10- // Player 10
     const player10 = new PlayerObject({
         playerName: 'Bryce',
         playerLastName: 'Harper',
@@ -161,8 +173,9 @@ const todaysGame = new GameObject({
         power: .8,
         skill: .8
     });
+    //console.log(player10);
 
-    // -- // Player 11
+// -11- // Player 11
     const player11 = new PlayerObject({
         playerName: 'Mascot',
         jerseyNum: 00,
@@ -173,8 +186,9 @@ const todaysGame = new GameObject({
         power: .1,
         skill: .1
     });
+    //console.log(player11);
 
-    // -- // Player 12
+// -12- // Player 12
     const player12 = new PlayerObject({
         playerName: 'Bat-Boy',
         jerseyNum: -5,
@@ -185,3 +199,5 @@ const todaysGame = new GameObject({
         power: .1,
         skill: .1
     });
+    //console.log(player12);
+    //console.log(leaguePlayers)
