@@ -3,26 +3,158 @@
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
 let leagueTeams = [];
 let leaguePlayers = [];
+
+let homeBattingOrderIndex = 0
+let awayBattingOrderIndex = 0
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
 //**// GAME EVENT CONSTRUCTORS
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
+// -- // GameObject
+class GameObject {
+    constructor (gameAttributes) {
+    // -- // GameObject ATTRIBUTES
+        this.date = new Date();
+        this.gameType = gameAttributes.gameType;
+        this.stadium = gameAttributes.stadium;
+        this.weather = gameAttributes.weather;
+        this.activeTeams    =   {   homeTeam: '', awayTeam: ''  };
+        this.activeRosters  =   {   homeRoster: [], awayRoster: []  };
+        this.innings = []
+
+    }
+
+    homeBattingOrder() {
+        return todaysGame.activeRosters.homeRoster.filter(player => player.position !== 'pitcher')
+    }
+
+    awayBattingOrder() {
+        return todaysGame.activeRosters.awayRoster.filter(player => player.position !== 'pitcher') 
+    }
+
+    // -- // HalfInningObject METHODS
+    coinToss () {
+        // figure out who is home and away
+    }
+}
+
+// -- // HalfInningObject
+class HalfInningObject /* extends GameObject */ {
+    constructor (halfInningAttributes) {
+        // super(halfInningAttributes);
+    // -- // HalfInningObject ATTRIBUTES   
+        // this.activePitcher = halfInningAttributes.pitcher
+        // this.activeBatter = halfInningAttributes.batter
+        // this.ActiveFieldersArray = [];
+        
+        this.atBatsArray = [];
+        this.baserunners = [];
+        
+        // PUSH INTO GAME OBJECT
+        todaysGame.innings.unshift(this)
+    }   
+
+    currentOuts () {
+
+    }
+}
+
+// -- // AtBatObject
+class AtBatObject /* extends HalfInningObject */ {
+    constructor(atBatAttributes) {
+        // super(atBatAttributes);
+    // -- // AtBatObject ATTRIBUTES
+        // this.activePitcher = atBatAttributes.activePitcher;
+        // this.activeBatter = atBatAttributes.activeBatter;
+        this.activeBatter = {};
+        this.activePitcher = {};
+        this.avgFielderSkill = undefined;
+
+        this.pitchCount = {     balls: 0,   strikes: 0      }
+        this.pitchesArray = [];
+        todaysGame.innings[0].atBatsArray.unshift(this)
+
+    }
+    
+    // -- // AtBatObject METHODS
+    // -- // HalfInningObject METHODS
+    FINDactivePitcher (topBTMbool) {
+        if (topBTMbool === 'top') {
+            let activePitcherArray = todaysGame.activeRosters.homeRoster.filter(player => player.position == 'pitcher')
+            return activePitcherArray[0]; // each team only has one pitcher
+        } else {
+            let activePitcherArray = todaysGame.activeRosters.awayRoster.filter(player => player.position == 'pitcher')
+            return activePitcherArray[0]; // each team only hae one pitcher
+        }  
+    }
+
+    FINDactiveBatter (topBTMbool, homeBattingOrderIndex, awayBattingOrderIndex) {
+        if (topBTMbool === 'top') {
+            let activeBatterArray = todaysGame.awayBattingOrder()
+            console.log(activeBatterArray[awayBattingOrderIndex])
+            return activeBatterArray[awayBattingOrderIndex]
+        } else {
+            let activeBatterArray = todaysGame.homeBattingOrder()
+            console.log(activeBatterArray[homeBattingOrderIndex])
+            return activeBatterArray[homeBattingOrderIndex]
+        } 
+    }
+
+    FINDavgFielderSkill (topBTMbool) {
+        if (topBTMbool === 'top') {
+            let avgSKILL = todaysGame.activeRosters.homeRoster.reduce( (acc, cur) => {
+                return (acc + cur.skill) / todaysGame.activeRosters.homeRoster.length
+            }, 0)
+            avgSKILL
+            return avgSKILL
+        } else {
+            let avgSKILL = todaysGame.activeRosters.awayRoster.reduce( (acc, cur) => {
+                return (acc + cur) / todaysGame.activeRosters.awayRoster.length
+            }, 0)
+            avgSKILL
+            return avgSKILL
+        }
+    }
+        
+    updatePitchCount (PitchResult) {
+        if (PitchResult === 'BALL') {
+            this.pitchCount.balls += 1
+        } else if (PitchResult === 'STRIKE') {
+            this.pitchCount.strike += 1
+        } else {
+            // HIT
+            // -!!- call METHOD -!!- atBarResult
+            // -!!- call METHOD -!!- update baserunners
+        }
+            
+    }
+    atBatResult () {
+
+    }
+}
+
 // -- // Pitch Object
-class PitchObject {
+class PitchObject /* extends AtBatObject */  {
     constructor(pitchAttributes) {
         // super(pitchAttributes);
-
     // -- // PitchObject ATTRIBUTES
-
+        this.activeSpeed = undefined;
+        this.activePower = undefined;
+    
+        todaysGame.innings[0].atBatsArray[0].pitchesArray.unshift(this)
     }
 
     // -- // PitchObject METHODS
-    ActiveSpeed (pitcherMaxSpeed) {
+    FINDactiveSpeed (pitcherMaxSpeed) {
         // generate random number
         // get pitcher maxSpeed
+        this.activeSpeed = this.activePitcher.speed * Math.random()
+        return this.activeSpeed
     }
 
-    ActivePower (batterMaxPower) {
+    FINDactivePower (batterMaxPower) {
         // generate
+        this.activePower = batterMaxPower * Math.random()
+        return this.activePower
     }
 
     PitchResult (ActiveSpeed,ActivePower) {
@@ -47,82 +179,6 @@ class PitchObject {
     }
 }
 
-// -- // AtBatObject
-class AtBatObject {
-    constructor(atBatAttributes) {
-        // super(atBatAttributes);
-    // -- // AtBatObject ATTRIBUTES
-        this.activePitcher = atBatAttributes.activePitcher;
-        this.activeBatter = atBatAttributes.activeBatter;
-        this.pitchCount = {     balls: 0,   strikes: 0      }
-        this.pitchesArray = [];
-
-    }
-    
-    // -- // AtBatObject METHODS
-    updatePitchCount (PitchResult) {
-        if (PitchResult === 'BALL') {
-            this.pitchCount.balls += 1
-        } else if (PitchResult === 'STRIKE') {
-            this.pitchCount.strike += 1
-        } else {
-            // HIT
-            // -!!- call METHOD -!!- atBarResult
-            // -!!- call METHOD -!!- update baserunners
-        }
-            
-    }
-    atBatResult () {
-
-    }
-}
-
-// -- // HalfInningObject
-class HalfInningObject {
-    constructor (halfInningAttributes) {
-        //super(halfInningAttributes);
-    // -- // HalfInningObject ATTRIBUTES   
-        this.fieldersArray = [];
-        this.atBatsArray = [];
-        this.baserunners = [];
-    }
-
-    // -- // HalfInningObject METHODS
-    avgFielderSkill () {
-
-    }
-
-    currentOuts () {
-
-    }
-}
-
-// -- // GameObject
-class GameObject {
-    constructor (gameAttributes) {
-    // -- // GameObject ATTRIBUTES
-        this.date = new Date();
-        this.gameType = gameAttributes.gameType;
-        this.stadium = gameAttributes.stadium;
-        this.weather = gameAttributes.weather;
-        this.activeTeams    =   {   homeTeam: '', awayTeam: ''  };
-        this.activeRosters  =   {   homeRoster: [], awayRoster: []  };
-
-    }
-
-    // activeTeams () {
-
-    // }
-
-    activeRosters () {
-
-    }
-
-    // -- // HalfInningObject METHODS
-    coinToss () {
-        // figure out who is home and away
-    }
-}
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
 //**// PLAYER OBJECT CONSTRUCTOR
 // -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- **
@@ -206,20 +262,6 @@ class TeamObject {
         power: .6,
         skill: .4
     });
-    //console.log(player2);
-
-    // -- // ADD PITCHER
-    // const addPITCHER = new PlayerObject({
-    //     playerName: 'thisguy',
-    //     playerLastName: 'thisguy',
-    //     jerseyNum: 89,
-    //     position: 'pitcher',
-
-    //     // event threshold attributes
-    //     speed: .2,
-    //     power: .2,
-    //     skill: .2
-    // });
     //console.log(player2);
 
     // -- // Player 3
@@ -419,18 +461,18 @@ class TeamObject {
 // -- ** -- ** -- END
 
 // -- // -F- // DRAFT PLAYERS
-        // -- // MAP Necessary Arrays
-            let draftPlayersArray = leaguePlayers.map((player) => {
-                return player
-            });
-            console.log(leaguePlayers.length)
-            console.log(draftPlayersArray.length)
-            draftPlayersArray
+    // -- // MAP Necessary Arrays
+        let draftPlayersArray = leaguePlayers.map((player) => {
+            return player
+        });
+        console.log(leaguePlayers.length)
+        console.log(draftPlayersArray.length)
+        draftPlayersArray
     
-        // -- // SET VARIABLES
-            //  maxPitchers = 1;
-            //  maxInfielders = 2;
-            //  maxOutfielders = 3;
+    // -- // SET VARIABLES
+        //  maxPitchers = 1;
+        //  maxInfielders = 2;
+        //  maxOutfielders = 3;
         
         // -- // FUNCTION
         // -- // -- // DRAFT PITCHERS
@@ -438,51 +480,51 @@ class TeamObject {
             let draftPitcherArray = draftPlayersArray.filter(player => player.position === 'pitcher')
             console.log(draftPitcherArray.length)
 
-        // -- // -- // -- Function
-            function draftPitchers (gameObject, pitchersArray) {
-                let counter = 0
-                while ( 
-                    counter < 1
-                    // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.homeTeam.rosterMax && 
-                    // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.awayTeam.rosterMax     
-                )
-                {
-                    // -- // HOME Team Selection
-                    let chosenPlayerHOME = pitchersArray[Math.floor(Math.random() * pitchersArray.length)];
-                        console.log(chosenPlayerHOME)
+    // -- // -- // -- Function
+        function draftPitchers (gameObject, pitchersArray) {
+            let counter = 0
+            while ( 
+                counter < 1
+                // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.homeTeam.rosterMax && 
+                // todaysGame.activeTeams.homeRoster !== todaysGame.activeTeams.awayTeam.rosterMax     
+            )
+            {
+                // -- // HOME Team Selection
+                let chosenPlayerHOME = pitchersArray[Math.floor(Math.random() * pitchersArray.length)];
+                    console.log(chosenPlayerHOME)
 
-                        // push player onto FRONT of array
-                        console.log(gameObject)
-                        gameObject.activeRosters.homeRoster.unshift(chosenPlayerHOME)
-                        console.log(gameObject.activeRosters.homeRoster.length);
+                    // push player onto FRONT of array
+                    console.log(gameObject)
+                    gameObject.activeRosters.homeRoster.unshift(chosenPlayerHOME)
+                    console.log(gameObject.activeRosters.homeRoster.length);
 
-                        // remove player from pitchersArray
-                        pitchersArray.splice(pitchersArray.indexOf(gameObject.activeRosters.homeRoster[0]),1)
-                            console.log(pitchersArray.length)
-                    
-                    // -- // AWAY Team Selection
-                    let chosenPlayerAWAY = pitchersArray[Math.floor(Math.random() * pitchersArray.length)];
-                        console.log(chosenPlayerAWAY)
+                    // remove player from pitchersArray
+                    pitchersArray.splice(pitchersArray.indexOf(gameObject.activeRosters.homeRoster[0]),1)
+                        console.log(pitchersArray.length)
+                
+                // -- // AWAY Team Selection
+                let chosenPlayerAWAY = pitchersArray[Math.floor(Math.random() * pitchersArray.length)];
+                    console.log(chosenPlayerAWAY)
 
-                        // push player onto FRONT of array
-                        gameObject.activeRosters.awayRoster.unshift(chosenPlayerAWAY)
-                        console.log(gameObject.activeRosters.awayRoster.length);
-                    
-                        // remove player from pitchersArray
-                        pitchersArray.splice(pitchersArray.indexOf(gameObject.activeRosters.awayRoster[0]),1)
-                            console.log(pitchersArray.length)
-                    // -- // Increment Counter
-                    counter
-                    ++counter
-                    counter
-                }
-            };   
+                    // push player onto FRONT of array
+                    gameObject.activeRosters.awayRoster.unshift(chosenPlayerAWAY)
+                    console.log(gameObject.activeRosters.awayRoster.length);
+                
+                    // remove player from pitchersArray
+                    pitchersArray.splice(pitchersArray.indexOf(gameObject.activeRosters.awayRoster[0]),1)
+                        console.log(pitchersArray.length)
+                // -- // Increment Counter
+                counter
+                ++counter
+                counter
+            }
+        };   
 
-            // -- // -- // CALL FUNCTION
-                draftPitchers (todaysGame, draftPitcherArray);
-            // -- // Check Function Call
-                console.log(todaysGame.activeRosters.homeRoster)
-                console.log(todaysGame.activeRosters.awayRoster)
+        // -- // -- // CALL FUNCTION
+            draftPitchers (todaysGame, draftPitcherArray);
+        // -- // -- // CHECK 
+            console.log(todaysGame.activeRosters.homeRoster)
+            console.log(todaysGame.activeRosters.awayRoster)
 
         // -- // -- // DRAFT INFIELDERS
             // -- // -- // -- Filter Infielders
@@ -577,9 +619,40 @@ class TeamObject {
             console.log(todaysGame.activeRosters.homeRoster)
             console.log(todaysGame.activeRosters.awayRoster)   
 
+// -- ** -- ** -- END
 
-            console.log(todaysGame);
-
-            // -- ** -- ** -- END   
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- 
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- 
+// START GAME LOGIC
+// FIRST PITCH AND BUILD UP by backfilling arrays
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- 
+// -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- 
     
+//**// Create ENVIRONMENT For First Pitch
+// Everything BELOW the game object will be the the 'ACTIVE' version meanind only made ONCE then pushed into other arrasy
+// -- // CREATE HalfInningObject
+    const ACTIVE_halfInning = new HalfInningObject ({})
+    console.log(ACTIVE_halfInning)
+
+// -- // CREAT AtBatObject
+    const atBat_1 = new AtBatObject({})
+    
+    // Set Active Batter
+    ACTIVE_halfInning.atBatsArray[0].activeBatter = ACTIVE_halfInning.atBatsArray[0].FINDactiveBatter('top',homeBattingOrderIndex, awayBattingOrderIndex)
+        console.log(ACTIVE_halfInning.atBatsArray[0].activeBatter)
+    // Set Active Pitcher
+    ACTIVE_halfInning.atBatsArray[0].activePitcher = ACTIVE_halfInning.atBatsArray[0].FINDactivePitcher('top')
+        console.log(ACTIVE_halfInning.atBatsArray[0].activePitcher)
+    // Set Active Skill
+    ACTIVE_halfInning.avgFielderSkill = ACTIVE_halfInning.atBatsArray[0].FINDavgFielderSkill('top')
+        console.log(ACTIVE_halfInning.avgFielderSkill )
+
+// -- // CREATE PITCH
+    const pitchA1_1 = new PitchObject({})  
+    // batter max power
+    console.log(ACTIVE_halfInning.atBatsArray[0].activeBatter.power)
+    ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].activePower = ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].FINDactivePower()
+
+
+
 

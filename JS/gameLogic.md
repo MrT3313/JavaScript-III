@@ -14,19 +14,23 @@
 == GAME LOGIC ==
     C) Game Initiation Logic
         IF (gameType === simulation)
-            B.1) activeTeams = RedSox / Yankees
+            *SIMULATION* home / away = random draft
         IF (gameType === singlePlayer)
-            B.2)    *USER* = homeTeam
-                    *USER* = user selects team
-                    *SIMULATION* awayTeam = random selection
+            B.2)    *USER* = homeTeam & team selection
+                    *USER* = user draft
+                    *SIMULATION* awayTeam = random draft
         IF (gameType === multiPlayer)
             B.3)    rocks / paper / sizzors game --> who is home (w/ first pick) & who is away
     D) Create Todays Game
-    E) Draft Teams
-    F) Draft Players
-        E.1) Filter Pitchers
-        E.2) Filter Infielders
-        E.3) Filter Outfielders
+    E) Draft Teams --> see gameType logic
+    F) Draft Players --> see gameType logic
+        E.1) Draft Pitchers
+        E.2) Draft Infielders
+        E.3) Draft Outfielders
+    G) Create Batting Order
+    H) 
+    
+    
     G) Create HalfInningObject
         G)  Create AtBatObject
             Batter 1 --> push atBarResult to HalfInningObject.atBatsArray
