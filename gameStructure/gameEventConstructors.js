@@ -23,6 +23,19 @@ class GameObject {
     awayBattingOrder() {
         return todaysGame.activeRosters.awayRoster.filter(player => player.position !== 'pitcher') 
     }
+
+    updatePitchCount (currentPitchCount, PitchResult) {
+        if (PitchResult === 'BALL') {
+            currentPitchCount.balls += 1
+        } else if (PitchResult === 'STRIKE') {
+            currentPitchCount.strike += 1
+        } else {
+            // HIT
+            // -!!- call METHOD -!!- atBarResult
+            // -!!- call METHOD -!!- update baserunners
+        }
+        return currentPitchCount      
+    }
 }
 
 // -2- // HalfInningObject
@@ -95,18 +108,6 @@ class AtBatObject /* extends HalfInningObject */ {
         }
     }
         
-    updatePitchCount (PitchResult) {
-        if (PitchResult === 'BALL') {
-            this.pitchCount.balls += 1
-        } else if (PitchResult === 'STRIKE') {
-            this.pitchCount.strike += 1
-        } else {
-            // HIT
-            // -!!- call METHOD -!!- atBarResult
-            // -!!- call METHOD -!!- update baserunners
-        }
-            
-    }
     FINDatBatResult () {
 
     }

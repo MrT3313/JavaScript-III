@@ -1,4 +1,8 @@
-
+// ** // Pitch Result Update
+    function pitchResultUpdate(result) {
+        
+    }
+// -- ** -- ** -- END
 
 // ** // draftTeams
     function draftTeams(gameObject, draftArray) {

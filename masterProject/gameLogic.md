@@ -8,80 +8,76 @@
         -Leverage inheritance and the inherently nested nature of sports to practice
         JS CLASSES
 
+== -- == -- == -- == -- == 
+Structural Start
+A) leagueTeams array >= 2
+    -*USE* TeamObject
+    -*Create* team
+B) leaguePlayers array >= 12
+    >= 2 pitchers
+    >= 4 infielders
+    >= 6 outfielders
+    -*USE* PlayerObject
+    -*CREATE* player
 
-OUT OF DATE!!!! 1/31/19
+New Game Logic:
+1) --> turn into called 'createGame' function
+-*USE* GameObject
+    -*userFILL* gameType
+        -avail --> simulation
+        -NOTavail --> singlePlayer
+        -NOTavail --> multiPlayer
+    -*userFILL* stadium     // like all star or exhibition game
+-*CREATE* todaysGame
 
+2) 
+-*USE* draftTeams 
+    -*LOGIC* draftTeamsArray = leagueTeams.map()
+3)
+-*USE* draftPlayers
+    -*LOGIC* draftPlayersArray = leaguePlayers.map() 
+    -draftPitchers
+        -*LOGIC* filter 'pitchers'
+    -draftOutfielders
+        -*LOGIC* filter 'outfielders'
+    -draftInfielders
+        -*LOGIC* filter 'infielders' 
+4) 
+-*USE* HalfInningObject
+-*CREATE* ACTIVE_halfInning
 
-== STRUCTURAL START ==
-    A) *CREATE* leagueTeams @teamObject constructor PUSH leagueTeams                -- array of all available teams
-    B) *CREATE* leaguePlayers @playerObject constructor PUSH leaguePlayers          -- array of all available players 
-== GAME LOGIC ==
-    C) Game Initiation Logic
-        IF (gameType === simulation)
-            *SIMULATION* home / away = random draft
-        IF (gameType === singlePlayer)
-            B.2)    *USER* = homeTeam & team selection
-                    *USER* = user draft
-                    *SIMULATION* awayTeam = random draft
-        IF (gameType === multiPlayer)
-            B.3)    rocks / paper / sizzors game --> who is home (w/ first pick) & who is away
-    D) Create Todays Game
-    E) Draft Teams --> see gameType logic
-    F) Draft Players --> see gameType logic
-        E.1) Draft Pitchers
-        E.2) Draft Infielders
-        E.3) Draft Outfielders
-    G) Create Batting Order
-    H) 
-    
-    
-    G) Create HalfInningObject
-        G)  Create AtBatObject
-            Batter 1 --> push atBarResult to HalfInningObject.atBatsArray
-            Batter n --> push atBarResult to HalfInningObject.atBatsArray
-                H) Create PitchObject
-                    Pitch 1 --> push pitchResult to AtBatObject.pitchesArray
-                            --> call atBatObject.updatePitchCount
-                    Pitch n --> push pitchResult to AtBatObject.pitchesArray
-                            --> call atBatObject.updatePitchCount
-                                --> call AtBatObject.atBatResult
+5)
+-*USE* AtBatObject
+-*CREATE* ACTIVE_atBat
 
+5-1)
+-*USE* FINDactiveBatter
+-*UPDATE* activeBatter
+5-2)
+-*USE* FINDactivePitcher
+-*UPDATE* activePitcher
+5-3)
+-*USE* FINDavgFielderSkill
+-*UPDATE* avgFielderSkill
 
+6) 
+-*USE* PitchObject
+-*CREATE* ACTIVE_pitch
 
+6-1)
+-*USE* FINDactivePower
+-*UPDATE* activePower
+6-2)
+-*USE* FINDactiveSpeed
+-*UPDATE* activeSpeed
+6-3)
+-*USE* FINDpitchResult
+-*UPDATE* pitchResult
 
-
-== GAME LOGIC ==
-    3) SET DRAFT BOARD
-        3.1) *LOGIC* @player constructor function --> players.push()
-    4) SET TEAMS FOR GAME DRAFT
-        4.1) *LOGIC* @team constructor function --> teams.push()
-    5) Draft Teams
-        5.1) draft order = teams array order 
-        5.2) *LOGIC* do until team1.rosterArray === rosterMax && team2.rosterArray === rosterMax
-                *LOGIC* generate random number
-                *LOGIC*
-                    IF --> random number > .5 
-                        THEN --> currentTeam.rosterArray.push(currentPlayer)
-                            END IF
-                        ELSE --> nextPlayer
-                *LOGIC* switch current team
-    6) CREATE gameArray
-    7) CREATE pitchCount
-    7) *LOGIC* call GameObject.createEvent(pitcher, batter, fielders, pitchCount)
-        7.1) *LOGIC* call this.activeSpeed
-        7.2) *LOGIC* call this.activePower
-        7.3) *LOGIC*
-                IF pitcher.activeSpeed < 10 
-                    THEN    
-                        --> BALL
-                        --> call PitchCounter.increment(ball)
-                    elseIF  
-                        --> IF pitcher.activeSpeed < batter.power
-                                THEN    --> STRIKE
-                                        --> call PitchCounter .increment(strike)
-                                ELSE    --> HIT
-                
-
+...
+.
+..
+.
 
 
 
