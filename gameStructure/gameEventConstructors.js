@@ -70,11 +70,11 @@ class AtBatObject /* extends HalfInningObject */ {
     FINDactiveBatter (topBTMbool, homeBattingOrderIndex, awayBattingOrderIndex) {
         if (topBTMbool === 'top') {
             let activeBatterArray = todaysGame.awayBattingOrder()
-            console.log(activeBatterArray[awayBattingOrderIndex])
+            //console.log(activeBatterArray[awayBattingOrderIndex])
             return activeBatterArray[awayBattingOrderIndex]
         } else {
             let activeBatterArray = todaysGame.homeBattingOrder()
-            console.log(activeBatterArray[homeBattingOrderIndex])
+            //console.log(activeBatterArray[homeBattingOrderIndex])
             return activeBatterArray[homeBattingOrderIndex]
         } 
     }
@@ -139,18 +139,18 @@ class PitchObject /* extends AtBatObject */  {
 
     FINDpitchResult (ActiveSpeed,ActivePower) {
         if (this.activeSpeed < .10) {
-            console.log(`BALL -- THIS GUY CAN'T FIND THE PLATE!`)
+            //console.log(`BALL -- THIS GUY CAN'T FIND THE PLATE!`)
             
             return 'BALL'
             // -!!- call METHOD -!!- updatePitchCount
             // -!!- push the ENTIRE Pitch Object into AtBatObject.pitchesArray
         } else if (this.activeSpeed > this.activePower) {
-            console.log(`STRIKE`)
+            //console.log(`STRIKE`)
             return 'STRIKE'
             // -!!- call METHOD -!!- updatePitchCount
             // -!!- push the ENTIRE Pitch Object into AtBatObject.pitchesArray
         } else {
-            console.log(`HIT`)
+            //console.log(`HIT`)
             // -!!- GO DOWN fielders logic tree
             
             return 'HIT'

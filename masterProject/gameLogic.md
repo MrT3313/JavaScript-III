@@ -8,6 +8,10 @@
         -Leverage inheritance and the inherently nested nature of sports to practice
         JS CLASSES
 
+
+OUT OF DATE!!!! 1/31/19
+
+
 == STRUCTURAL START ==
     A) *CREATE* leagueTeams @teamObject constructor PUSH leagueTeams                -- array of all available teams
     B) *CREATE* leaguePlayers @playerObject constructor PUSH leaguePlayers          -- array of all available players 
