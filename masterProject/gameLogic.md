@@ -21,7 +21,7 @@ B) leaguePlayers array >= 12
     -*CREATE* player
 
 New Game Logic:
-1) --> turn into called 'createGame' function
+1) --> make playBall function
 -*USE* GameObject
     -*userFILL* gameType
         -avail --> simulation
@@ -30,18 +30,16 @@ New Game Logic:
     -*userFILL* stadium     // like all star or exhibition game
 -*CREATE* todaysGame
 
+
 2) 
 -*USE* draftTeams 
-    -*LOGIC* draftTeamsArray = leagueTeams.map()
+    -*UPDATE*- homeTeam
+    -*UPDATE*- awayTeam
 3)
 -*USE* draftPlayers
-    -*LOGIC* draftPlayersArray = leaguePlayers.map() 
-    -draftPitchers
-        -*LOGIC* filter 'pitchers'
-    -draftOutfielders
-        -*LOGIC* filter 'outfielders'
-    -draftInfielders
-        -*LOGIC* filter 'infielders' 
+    -*UPDATE*- homeRoster
+    -*UPDATE*- awayRoster
+
 4) 
 -*USE* HalfInningObject
 -*CREATE* ACTIVE_halfInning
@@ -50,15 +48,16 @@ New Game Logic:
 -*USE* AtBatObject
 -*CREATE* ACTIVE_atBat
 
-5-1)
--*USE* FINDactiveBatter
+6) 
+-*USE* activeAtBat
 -*UPDATE* activeBatter
-5-2)
--*USE* FINDactivePitcher
 -*UPDATE* activePitcher
-5-3)
--*USE* FINDavgFielderSkill
 -*UPDATE* avgFielderSkill
+
+
+
+
+
 
 6) 
 -*USE* PitchObject
@@ -73,6 +72,31 @@ New Game Logic:
 6-3)
 -*USE* FINDpitchResult
 -*UPDATE* pitchResult
+
+7) 
+Pitch Result Conditional 
+-*USE* pitchResultUpdate
+-*UPDATE* pitchCounter
+
+8)
+-*USE* PitchObject
+-*UPDATE* ACTIVE_pitch
+
+9) 
+-*USE* activeStats & pitchResult
+-*UPDATE* activePower
+-*UPDATE* activeSpeed
+-*UPDATE* pitchResult
+
+10) 
+-*USE* updatePitchCount
+-*UPDATE* currentPitchCount
+
+11) -*USE* newPitch
+-*CREATE* ACTIVE_pitch
+
+12) 
+END OF AT BAT LOGIC
 
 ...
 .

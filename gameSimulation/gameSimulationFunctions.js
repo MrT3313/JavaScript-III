@@ -1,26 +1,43 @@
-// ** // Pitch Result Update
-    function pitchResultUpdate(result) {
-        
-    }
-// -- ** -- ** -- END
+//**// PLAY BALL
+function playBall(gameType,stadium,weather) {
+
+    return todaysGame
+}
 
 // ** // draftTeams
-    function draftTeams(gameObject, draftArray) {
-        // set home team & add to GameObject AciveTeams
-        //console.log(draftArray.length) 
-        gameObject.activeTeams.homeTeam = draftArray[Math.floor(Math.random() * draftArray.length)];        
-            // remove homeTeam from draftArray
-            draftArray.splice(draftArray.indexOf(gameObject.activeTeams.homeTeam),1);
-            //console.log(draftArray.length);
-        
-        // set away team & add to GameObject AciveTeams
-        //console.log(draftArray.length) 
-        gameObject.activeTeams.awayTeam = draftArray[Math.floor(Math.random() * draftArray.length)];
-            // remove homeTeam from draftArray
-            draftArray.splice(draftArray.indexOf(gameObject.activeTeams.awayTeam),1);
-            //console.log(draftArray.length) 
-    }
+function draftTeams(gameObject) {
+    let draftTeamsArray = leagueTeams.map((team) => {
+        return team;
+    })
+    gameObject.activeTeams.homeTeam = draftTeamsArray[Math.floor(Math.random() * draftTeamsArray.length)];        
+        // remove homeTeam from draftTeamsArray
+        draftTeamsArray.splice(draftTeamsArray.indexOf(gameObject.activeTeams.homeTeam),1);
+        //console.log(draftTeamsArray.length);
+    
+    // set away team & add to GameObject AciveTeams
+    //console.log(draftTeamsArray.length) 
+    gameObject.activeTeams.awayTeam = draftTeamsArray[Math.floor(Math.random() * draftTeamsArray.length)];
+        // remove homeTeam from draftTeamsArray
+        draftTeamsArray.splice(draftTeamsArray.indexOf(gameObject.activeTeams.awayTeam),1);
+        //console.log(draftTeamsArray.length) 
+}
 // -- ** -- ** -- END
+
+//**// draftPlayers
+function draftPlayers () {
+    let draftPlayersArray = leaguePlayers.map((player) => {
+        return player
+    });
+    // -1- // draftPitchers
+        let draftPitcherArray = draftPlayersArray.filter(player => player.position === 'pitcher')
+        draftPitchers (todaysGame, draftPitcherArray);
+    // -2- // draftInfielders
+        let draftInfieldArray = draftPlayersArray.filter(player => player.position === 'infield')
+        draftInfielders (todaysGame, draftInfieldArray);
+    // -3- // draftOutfielders
+        let draftOutfieldArray = draftPlayersArray.filter(player => player.position === 'outfield')
+        draftOutfielders (todaysGame, draftOutfieldArray);
+}
 
 // ** // draftPitchers
     function draftPitchers (gameObject, pitchersArray) {
@@ -136,3 +153,38 @@
         }
     }; 
 // -- ** -- ** -- END
+//**// activeAtBat
+function activeAtBat() {
+    // -- // activeBatter
+        ACTIVE_halfInning.atBatsArray[0].activeBatter = ACTIVE_halfInning.atBatsArray[0].FINDactiveBatter('top',homeBattingOrderIndex, awayBattingOrderIndex)
+    // -- // activePitcher
+        ACTIVE_halfInning.atBatsArray[0].activePitcher = ACTIVE_halfInning.atBatsArray[0].FINDactivePitcher('top')
+    // -- // activePitcher
+        ACTIVE_halfInning.avgFielderSkill = ACTIVE_halfInning.atBatsArray[0].FINDavgFielderSkill('top')
+}
+// -- ** -- ** -- END
+//**// activeStats
+function activeStats (ACTIVE_halfInning) {
+    // -- // Active Power
+    ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].activePower = ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].FINDactivePower(    ACTIVE_halfInning.atBatsArray[0].activeBatter.power )
+    let Apower = ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].activePower
+    // -- // Active Speed
+    ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].activeSpeed = ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].FINDactiveSpeed(    ACTIVE_halfInning.atBatsArray[0].activePitcher.speed )
+    let Aspeed = ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].activeSpeed
+    // -- // Pitch Result
+    ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].pitchResult =  ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].FINDpitchResult(   ACTIVE_halfInning.atBatsArray[0].activePitcher.speed, ACTIVE_halfInning.atBatsArray[0].activeBatter.power   )
+    let Presult = ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].pitchResult
+    return [Apower, Aspeed, Presult]
+}
+
+//**// newPitch
+function runNewPitch (ACTIVE_halfInning) {
+    // -1- // CREATE PitchObject ** FIRST USAGE = ONLY DECLARATION
+    let ACTIVE_pitch = new PitchObject({}) ; 
+    // -2- // CALCULATE active Stats & pitch result
+    activeStats(ACTIVE_halfInning)
+    // -3- // UpdatePitchCount
+    if (Presult !== 'HIT') {
+        todaysGame.updatePitchCount(Pcounter, Presult)
+    }
+}

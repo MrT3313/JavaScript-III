@@ -28,7 +28,7 @@ class GameObject {
         if (PitchResult === 'BALL') {
             currentPitchCount.balls += 1
         } else if (PitchResult === 'STRIKE') {
-            currentPitchCount.strike += 1
+            currentPitchCount.strikes += 1
         } else {
             // HIT
             // -!!- call METHOD -!!- atBarResult
@@ -126,14 +126,11 @@ class PitchObject /* extends AtBatObject */  {
 
     // -- // PitchObject METHODS
     FINDactiveSpeed (pitcherMaxSpeed) {
-        // generate random number
-        // get pitcher maxSpeed
         this.activeSpeed = pitcherMaxSpeed * Math.random()
         return this.activeSpeed
     }
 
     FINDactivePower (batterMaxPower) {
-        // generate
         this.activePower = batterMaxPower * Math.random()
         return this.activePower
     }
