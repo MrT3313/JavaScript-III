@@ -107,10 +107,6 @@ class AtBatObject /* extends HalfInningObject */ {
             return avgSKILL
         }
     }
-        
-    FINDatBatResult () {
-
-    }
 }
 
 // -4- // Pitch Object
@@ -137,23 +133,19 @@ class PitchObject /* extends AtBatObject */  {
 
     FINDpitchResult (ActiveSpeed,ActivePower) {
         if (this.activeSpeed < .10) {
-            //console.log(`BALL -- THIS GUY CAN'T FIND THE PLATE!`)
+            todaysGame.updatePitchCount(currentPitchCount, PitchResult)
             
-            return 'BALL'
-            // -!!- call METHOD -!!- updatePitchCount
-            // -!!- push the ENTIRE Pitch Object into AtBatObject.pitchesArray
+            let Presult = 'ball';
+            return Presult;
         } else if (this.activeSpeed > this.activePower) {
-            //console.log(`STRIKE`)
-            return 'STRIKE'
-            // -!!- call METHOD -!!- updatePitchCount
-            // -!!- push the ENTIRE Pitch Object into AtBatObject.pitchesArray
-        } else {
-            //console.log(`HIT`)
-            // -!!- GO DOWN fielders logic tree
             
-            return 'HIT'
-            // -!!- call METHOD -!!- updatePitchCount
-            // -!!- call METHOD -!!- push 
+            
+            let Presult = 'strike';
+            return Presult;
+        } else {
+            clearPitchCount();
+            let Presult = 'hit';
+            return Presult;
         }
     }
 }
