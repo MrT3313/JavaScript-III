@@ -12,27 +12,27 @@
   <!-- <script src="prototypes.js"></script> -->
 
   <!-- *STRUCTURE* -->
-    <script src="/gameStructure/gameEventConstructors.js"></script>
-    <script src="/gameStructure/player-teamConstructors.js"></script>
+    <script src="/gameStructure/constructorsGameEvents.js"></script>
+    <script src="/gameStructure/constructorsTeam&Player.js"></script>
     <script src="/gameStructure/createObjects&Arrays.js"></script>
-
-    <!-- gameDraft -->
-      <script src="/gameStructure/gameDraft/draftTeams.js"></script>  
-      <script src="/gameStructure/gameDraft/draftPlayers.js"></script>
       
   <!-- *FUNCTIONS* -->
     <!-- create -->
       <script src="/definedFunctions/create/newGame.js"></script>
       <script src="/definedFunctions/create/newHalfInning.js"></script>
-      <script src="/definedFunctions/create/newAtBatSetup.js"></script>
+      <script src="/definedFunctions/create/newAtBat.js"></script>
       <script src="/definedFunctions/create/newPitch.js"></script>
-    
-    <!-- run -->
-      <script src="/definedFunctions/run/pitchResultConditional.js"></script>
     
     <!-- calculate -->
       <script src="/definedFunctions/calculate/activeAtBat.js"></script>
       <script src="/definedFunctions/calculate/activeStats.js"></script>
+      <script src="/definedFunctions/calculate/atBatResult.js"></script>
+    
+      <!-- run -->
+        <script src="/gameSimulation/run/runAtBat.js"></script>
+    <!-- gameDraft -->
+      <script src="/gameSimulation/run/gameDraft/draftPlayers.js"></script>  
+      <script src="/gameSimulation/run/gameDraft/draftTeams.js"></script>
 
     <!-- loops -->
       <script src="/definedFunctions/loops/pitchLoop.js"></script>
@@ -40,6 +40,10 @@
   <!-- *SIMULATION* -->
     <!-- <script src="/gameSimulation/gameSimulationFunctions.js"></script> -->
     <script src="/gameSimulation/inauguralGame.js"></script>
+    
+
+
+    
 
 </head>
 

@@ -15,48 +15,35 @@ let todaysGame = newGame(gameType, stadium, weather)
 
 // Inning Setup
     let inningNumber = todaysGame.innings.length
+    console.log('--CREATED NEW ACTIVE HALF INNING--')
     inningSetup(inningNumber)
     ACTIVE_halfInning = todaysGame.innings[0]
 
+// -BATTER 1- //
 // At Bat Setup
     console.log('--At Bat Setup--')
-    atBatSetup(ACTIVE_halfInning)
+    newAtBat(ACTIVE_halfInning)
     console.log(ACTIVE_halfInning.atBatsArray)
 
-// pitchLOOP
-    console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.balls)
-    console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.strikes)
-    // // -- WHILE LOOP -- //
-        // do {
-        //         console.log('--PITCH LOOP--')
-        //         pitchLoop(ACTIVE_halfInning)
-        // } while (
-        //         ACTIVE_halfInning.atBatsArray[0].pitchCount.balls !== 4 ||
-        //         ACTIVE_halfInning.atBatsArray[0].pitchCount.strikes !== 3 || 
-        //         ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].pitchResult !== 'hit'
-        // )
+// Run At Bat
+    runAtBat()
 
-    // -- Manual Loop -- //
-        console.log('--PITCH LOOP--')
-        pitchLoop(ACTIVE_halfInning)
-            // console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.balls)
-            // console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.strikes)
+// -BATTER 2- //
+// Create New Batter
+newAtBat(ACTIVE_halfInning)
+console.log(ACTIVE_halfInning.atBatsArray)
 
-        console.log('--PITCH LOOP--')
-        pitchLoop(ACTIVE_halfInning)
-            console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.balls)
-            console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.strikes)
+// Run At Bat
+runAtBat()
 
-        // console.log('--PITCH LOOP--')
-        // pitchLoop(ACTIVE_halfInning)
-        //     console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.balls)
-        //     console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.strikes)
-
-        // console.log('--PITCH LOOP--')
-        // pitchLoop(ACTIVE_halfInning)
-        //     console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.balls)
-        //     console.log(todaysGame.innings[0].atBatsArray[0].pitchCount.strikes)
+    // // At bat result
+    // console.log('--AT BAT RESULT--')
+    // console.log(ACTIVE_halfInning.atBatsArray[0].atBatResult)
 
 
 
-    console.log(todaysGame)
+
+
+
+
+console.log(todaysGame)

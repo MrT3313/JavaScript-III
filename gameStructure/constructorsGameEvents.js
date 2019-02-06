@@ -32,27 +32,13 @@ class GameObject {
         console.log(pitchResult)
         
         if (pitchResult === 'ball') {
-            if (ACTIVE_pitchCount.balls + 1 === 4) {
-                ACTIVE_pitchCount.balls = 0
-                ACTIVE_pitchCount.strikes = 0
-                // WALK
-            } else {
-                ACTIVE_pitchCount.balls += 1
-            }
-            
+            ACTIVE_pitchCount.balls += 1
+
         } else if (pitchResult === 'strike') {
-            if (ACTIVE_pitchCount.strikes + 1 === 3) {
-                ACTIVE_pitchCount.balls = 0
-                ACTIVE_pitchCount.strikes = 0
-                // STRIKEOUT
-            } else {
-                ACTIVE_pitchCount.strikes += 1
-            }
+            ACTIVE_pitchCount.strikes += 1
 
         } else if (pitchResult === 'hit') {
             // Call Hit Method
-            ACTIVE_pitchCount.balls = 0
-            ACTIVE_pitchCount.strikes = 0
         }
         return ACTIVE_pitchCount      
     }
@@ -158,11 +144,13 @@ class PitchObject /* extends AtBatObject */  {
 
     FINDactivePower (batterMaxPower) {
         this.activePower = batterMaxPower * Math.random()
+        // -- DEBUG PITCHCOUNTER & STOPPING AN AT BAT
+        // this.activePower = 0
         return this.activePower
     }
 
     FINDpitchResult (ActiveSpeed,ActivePower) {
-        if (this.activeSpeed < .10) {
+        if (this.activeSpeed < .40) {
             let Presult = 'ball';
             return Presult;
         } else if (this.activeSpeed > this.activePower) {
