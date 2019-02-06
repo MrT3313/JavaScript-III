@@ -26,30 +26,35 @@ class GameObject {
         return todaysGame.activeRosters.awayRoster.filter(player => player.position !== 'pitcher') 
     }
 
-    updatePitchCount (currentPitchCount, pitchResult) {
+    updatePitchCount (ACTIVE_pitchCount, pitchResult) {
+        console.log('--from updatePitchCount--')
+        console.log(ACTIVE_pitchCount)
+        console.log(pitchResult)
+        
         if (pitchResult === 'ball') {
-            if (currentPitchCount.balls += 1 === 4) {
-                currentPitchCount.balls = 0
-                currentPitchCount.strikes = 0
+            if (ACTIVE_pitchCount.balls + 1 === 4) {
+                ACTIVE_pitchCount.balls = 0
+                ACTIVE_pitchCount.strikes = 0
                 // WALK
             } else {
-                currentPitchCount.balls += 1
+                ACTIVE_pitchCount.balls += 1
             }
             
         } else if (pitchResult === 'strike') {
-            if (currentPitchCount.strikes += 1 === 3) {
-                currentPitchCount.balls = 0
-                currentPitchCount.strikes = 0
+            if (ACTIVE_pitchCount.strikes + 1 === 3) {
+                ACTIVE_pitchCount.balls = 0
+                ACTIVE_pitchCount.strikes = 0
                 // STRIKEOUT
             } else {
-                currentPitchCount.strikes += 1
+                ACTIVE_pitchCount.strikes += 1
             }
 
         } else if (pitchResult === 'hit') {
             // Call Hit Method
+            ACTIVE_pitchCount.balls = 0
+            ACTIVE_pitchCount.strikes = 0
         }
-        console.log(currentPitchCount)
-        return currentPitchCount      
+        return ACTIVE_pitchCount      
     }
 
     updateOuts (atBatResult) {
