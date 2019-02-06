@@ -11,7 +11,9 @@ class GameObject {
         this.weather = gameAttributes.weather;
         this.activeTeams    =   {   homeTeam: '', awayTeam: ''  };
         this.activeRosters  =   {   homeRoster: [], awayRoster: []  };
-        this.innings = []
+        this.activeOuts = 0;
+        this.innings = [];
+        
 
     }
     
@@ -35,6 +37,16 @@ class GameObject {
             // -!!- call METHOD -!!- update baserunners
         }
         return currentPitchCount      
+    }
+
+    updateOuts (atBatResult) {
+        let outsCounter = 0
+        if (atBatResult === 'OUT') {
+            ++outsCounter
+        }
+        if (outsCounter === 3) {
+            // NEW INNING FUNCTION
+        }
     }
 }
 

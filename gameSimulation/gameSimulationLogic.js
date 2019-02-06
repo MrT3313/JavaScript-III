@@ -1,38 +1,16 @@
 
-//**// GAME LOGIC
-// -1- // PLAY BALL!! -- Create todaysGame
-    // playBall('simulation','Fenway','Snow')
-    // console.log(todaysGame)
-    // let todaysGame = new GameObject({
-    //     gameType: 'simulation', 
-    //     stadium: 'fenway', 
-    //     weather: 'snow'
-    // }); 
-    // console.log(todaysGame)
-// -- ** -- ** -- END
-// -2- // DRAFT TEAMS
-    draftTeams(todaysGame)
-// -- ** -- ** -- END
 
-// -3- // DRAFT PLAYERS
-    draftPlayers()
-// -- ** -- ** -- END 
 
-// -4- // CREATE HalfInningObject
-    let ACTIVE_halfInning = new HalfInningObject ({})
-// -- ** -- ** -- END
 
-// -5- // CREATE AtBatObject
-    let ACTIVE_atBat = new AtBatObject({})
-// -- ** -- ** -- END
 
-// -6- // activeAtBat
-    activeAtBat()
-// -- ** -- ** -- END
 
-// -7- // runNewPitch
-console.log(ACTIVE_halfInning)
-runNewPitch (ACTIVE_halfInning)
+// // -6- // activeAtBat
+//     activeAtBat()
+// // -- ** -- ** -- END
+
+// // -7- // runNewPitch
+// console.log(ACTIVE_halfInning)
+// runNewPitch (ACTIVE_halfInning)
 
 
 
