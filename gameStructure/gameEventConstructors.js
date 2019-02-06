@@ -26,16 +26,29 @@ class GameObject {
         return todaysGame.activeRosters.awayRoster.filter(player => player.position !== 'pitcher') 
     }
 
-    updatePitchCount (currentPitchCount, PitchResult) {
-        if (PitchResult === 'BALL') {
-            currentPitchCount.balls += 1
-        } else if (PitchResult === 'STRIKE') {
-            currentPitchCount.strikes += 1
-        } else {
-            // HIT
-            // -!!- call METHOD -!!- atBarResult
-            // -!!- call METHOD -!!- update baserunners
+    updatePitchCount (currentPitchCount, pitchResult) {
+        if (pitchResult === 'ball') {
+            if (currentPitchCount.balls += 1 === 4) {
+                currentPitchCount.balls = 0
+                currentPitchCount.strikes = 0
+                // WALK
+            } else {
+                currentPitchCount.balls += 1
+            }
+            
+        } else if (pitchResult === 'strike') {
+            if (currentPitchCount.strikes += 1 === 3) {
+                currentPitchCount.balls = 0
+                currentPitchCount.strikes = 0
+                // STRIKEOUT
+            } else {
+                currentPitchCount.strikes += 1
+            }
+
+        } else if (pitchResult === 'hit') {
+            // Call Hit Method
         }
+        console.log(currentPitchCount)
         return currentPitchCount      
     }
 
@@ -145,17 +158,12 @@ class PitchObject /* extends AtBatObject */  {
 
     FINDpitchResult (ActiveSpeed,ActivePower) {
         if (this.activeSpeed < .10) {
-            todaysGame.updatePitchCount(currentPitchCount, PitchResult)
-            
             let Presult = 'ball';
             return Presult;
         } else if (this.activeSpeed > this.activePower) {
-            
-            
             let Presult = 'strike';
             return Presult;
         } else {
-            clearPitchCount();
             let Presult = 'hit';
             return Presult;
         }

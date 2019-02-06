@@ -4,7 +4,7 @@ let todaysGame = newGame(gameType, stadium, weather)
     console.log(todaysGame)
 
 // Draft Teams
-draftTeams(todaysGame)
+    draftTeams(todaysGame)
     console.log('--Teams Drafted--')
     console.log(todaysGame)
 
@@ -15,38 +15,12 @@ draftTeams(todaysGame)
 
 // Inning Setup
     let inningNumber = todaysGame.innings.length
+    inningSetup(inningNumber)
+    ACTIVE_halfInning = todaysGame.innings[0]
+    console.log(ACTIVE_halfInning)
 
-// At Bat Setup
-
-// ***********************
-// ***********************
-// ***********************
-// ***********************
-// ***********************
-// ***********************
-// ***********************
-// ***********************
-// ***********************
-
-
-    atBatSetup(todaysGame.innings[0])
-
-    console.log('--Inning Created--')
-    console.log(inningNumber)
-    console.log(todaysGame.innings)
-
-    console.log(todaysGame.innings[0])
-
-
-
-// Calculate Pitch
-
-
-
-
-// Create At Bat
-// console.log('--ACTIVE AT BAT--')
-//     newAtBat()
-//     console.log(todaysGame.innings[0].atBatsArray[0])
-
-
+// pitchLOOP
+    console.log('--PITCH LOOP--')
+    pitchLoop(ACTIVE_halfInning)
+    console.log('--PITCH LOOP--')
+    pitchLoop(ACTIVE_halfInning)

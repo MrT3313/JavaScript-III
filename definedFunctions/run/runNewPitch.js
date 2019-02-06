@@ -1,8 +1,5 @@
 //**// newPitch
 
-function newPitch (ACTIVE_halfInning) {
-    
-}
 
 // //**// newPitch
 // function runNewPitch (ACTIVE_halfInning) {
