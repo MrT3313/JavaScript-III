@@ -19,8 +19,12 @@ debugger
     
     // Setting ACTIVE half inning
     ACTIVE_halfInning = todaysGame.innings[0]
+
 // -BATTER 1- //
 // At Bat Setup
+console.log(todaysGame)
+console.log(ACTIVE_halfInning)
+
     console.log('--At Bat Setup--')
     newAtBat(ACTIVE_halfInning)
     console.log(ACTIVE_halfInning.atBatsArray)

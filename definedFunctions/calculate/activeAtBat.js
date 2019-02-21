@@ -7,8 +7,9 @@ function activeAtBat(battingOrderIndex, ACTIVE_inningTitle, ACTIVE_halfInning) {
 
     }
     debugger 
+    console.log(ACTIVE_halfInning)
     // -- // activeBatter
-    ACTIVE_halfInning.atBatsArray[0].activeBatter = ACTIVE_halfInning.atBatsArray[0].FINDactiveBatter(inningTitle, battingOrderIndex)
+    ACTIVE_halfInning.atBatsArray[0].activeBatter = ACTIVE_halfInning.atBatsArray[0].FINDactiveBatter(ACTIVE_inningTitle, battingOrderIndex)
     
     // -- // activeBatter
         

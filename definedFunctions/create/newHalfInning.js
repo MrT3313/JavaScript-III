@@ -1,16 +1,24 @@
 //**// Setup Inning
 const inningSetup = function () {
     let inningNumber = todaysGame.innings.length
+
+        let inningTitle = ''
+        let ACTIVE_BO = undefined
+        const awayBO = todaysGame.awayBattingOrder()
+        const homeBO = todaysGame.homeBattingOrder()
+
+        console.log(awayBattingOrderIndex)
+        console.log(homeBattingOrderIndex)
     
     if (inningNumber !== 18) {
         if (inningNumber % 2 === 0) {
-            console.log('TOP')
-            newHalfInning('TOP')
-
+            inningTitle = 'TOP'
+            ACTIVE_BO = awayBO
         } else {
-            console.log('BOTTOM')
-            newHalfInning('BOTTOM')
+            inningTitle = 'BOTTOM'
+            ACTIVE_BO = homeBO
         }
+        newHalfInning(inningTitle, ACTIVE_BO)
     } else {
         console.log('GAME OVER')
     }
@@ -18,9 +26,10 @@ const inningSetup = function () {
 }
 
 //**// CREATE HalfInningObject
-const newHalfInning = function (title) {
+const newHalfInning = function (inningTitle, ACTIVE_BO) {
     let ACTIVE_halfInning = new HalfInningObject ({
-        halfInningTitle: title
+        inningTitle: inningTitle,
+        ACTIVE_BO: ACTIVE_BO,
     })
     return ACTIVE_halfInning
 }

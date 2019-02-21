@@ -59,9 +59,11 @@ class HalfInningObject /* extends GameObject */ {
     constructor (halfInningAttributes) {
         // super(halfInningAttributes);
     // -- // HalfInningObject ATTRIBUTES   
-        this.halfInningTitle = halfInningAttributes.halfInningTitle
+        this.inningTitle = halfInningAttributes.inningTitle;
+        this.ACTIVE_BO = halfInningAttributes.ACTIVE_BO;
         this.atBatsArray = [];
         this.baserunners = [];
+        this.outs = {   outs: 0   }
         
         // PUSH INTO GAME OBJECT
         todaysGame.innings.unshift(this)
@@ -90,7 +92,7 @@ class AtBatObject /* extends HalfInningObject */ {
     
     // -- // AtBatObject METHODS
     FINDactivePitcher (topBTMbool) {
-        if (topBTMbool === 'top') {
+        if (topBTMbool === 'TOP') {
             let activePitcherArray = todaysGame.activeRosters.homeRoster.filter(player => player.position == 'pitcher')
             return activePitcherArray[0]; // each team only has one pitcher
         } else {
@@ -99,15 +101,15 @@ class AtBatObject /* extends HalfInningObject */ {
         }  
     }
 
-    FINDactiveBatter (topBTMbool, homeBattingOrderIndex, awayBattingOrderIndex) {
-        if (topBTMbool === 'top') {
+    FINDactiveBatter (topBTMbool, battingOrderIndex) {
+        if (topBTMbool === 'TOP') {
             let activeBatterArray = todaysGame.awayBattingOrder()
             //console.log(activeBatterArray[awayBattingOrderIndex])
-            return activeBatterArray[awayBattingOrderIndex]
+            return activeBatterArray[battingOrderIndex]
         } else {
             let activeBatterArray = todaysGame.homeBattingOrder()
             //console.log(activeBatterArray[homeBattingOrderIndex])
-            return activeBatterArray[homeBattingOrderIndex]
+            return activeBatterArray[battingOrderIndex]
         } 
     }
 
