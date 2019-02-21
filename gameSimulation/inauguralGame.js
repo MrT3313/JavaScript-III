@@ -12,13 +12,13 @@ let todaysGame = newGame(gameType, stadium, weather)
     draftPlayers()
     console.log('--Players Drafted--')
     console.log(todaysGame)
-
+debugger
 // Inning Setup
-    let inningNumber = todaysGame.innings.length
     console.log('--CREATED NEW ACTIVE HALF INNING--')
-    inningSetup(inningNumber)
+    inningSetup()
+    
+    // Setting ACTIVE half inning
     ACTIVE_halfInning = todaysGame.innings[0]
-
 // -BATTER 1- //
 // At Bat Setup
     console.log('--At Bat Setup--')
@@ -28,8 +28,17 @@ let todaysGame = newGame(gameType, stadium, weather)
 // Run At Bat
     runAtBat()
 
+
+// ** // WHERE ARE WE??
+
+console.log(todaysGame)
+
+
+
+
 // -BATTER 2- //
 // Create New Batter
+// debugger
 newAtBat(ACTIVE_halfInning)
 console.log(ACTIVE_halfInning.atBatsArray)
 

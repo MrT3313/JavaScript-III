@@ -12,4 +12,7 @@ const atBatResult = function (ACTIVE_halfInning, pitchResult, balls, strikes) {
         console.log('STRIIIIIKEEEEE OUTTTTTTTT')
         ACTIVE_halfInning.atBatsArray[0].atBatResult = 'strikeout'
         }
+        
+        
+        homeBattingOrderIndex 
 }

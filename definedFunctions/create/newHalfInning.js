@@ -1,15 +1,26 @@
-//**// CREATE HalfInningObject
-    const newHalfInning = function () {
-        let ACTIVE_halfInning = new HalfInningObject ({})
-        return ACTIVE_halfInning
+//**// Setup Inning
+const inningSetup = function () {
+    let inningNumber = todaysGame.innings.length
+    
+    if (inningNumber !== 18) {
+        if (inningNumber % 2 === 0) {
+            console.log('TOP')
+            newHalfInning('TOP')
+
+        } else {
+            console.log('BOTTOM')
+            newHalfInning('BOTTOM')
+        }
+    } else {
+        console.log('GAME OVER')
     }
 
-//**// Setup Inning
-const inningSetup = function (inningNumber) {
-    if (inningNumber === 18) {
-        // GAME OVER
-        console.log('game OVER')
-    } else {
-        newHalfInning() 
-    }
+}
+
+//**// CREATE HalfInningObject
+const newHalfInning = function (title) {
+    let ACTIVE_halfInning = new HalfInningObject ({
+        halfInningTitle: title
+    })
+    return ACTIVE_halfInning
 }

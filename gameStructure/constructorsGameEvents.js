@@ -59,6 +59,7 @@ class HalfInningObject /* extends GameObject */ {
     constructor (halfInningAttributes) {
         // super(halfInningAttributes);
     // -- // HalfInningObject ATTRIBUTES   
+        this.halfInningTitle = halfInningAttributes.halfInningTitle
         this.atBatsArray = [];
         this.baserunners = [];
         
@@ -72,6 +73,8 @@ class AtBatObject /* extends HalfInningObject */ {
     constructor(atBatAttributes) {
         // super(atBatAttributes);
     // -- // AtBatObject ATTRIBUTES
+        this.homeBOindex = undefined;
+        this.awayBOindex = undefined;
         this.activeBatter = {};
         this.activePitcher = {};
         this.avgFielderSkill = undefined;

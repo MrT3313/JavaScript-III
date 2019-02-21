@@ -24,18 +24,13 @@ const runAtBat = function () {
             console.log(strikes)
         
         ++counter
-        if (counter === 15) {
-            break
-        }
+        // if (counter === 15) {
+        //     break
+        // }
     } while (
-        // counter < 7
-
         strikes !== 3 &&
         balls !== 4 &&
-
-        // ACTIVE_halfInning.atBatsArray[0].pitchCount.balls !== 4
         ACTIVE_halfInning.atBatsArray[0].pitchesArray[0].pitchResult !== 'hit'
-        // (ACTIVE_halfInning.atBatsArray[0].pitchCount.balls !== 4)
     );
 
     atBatResult(ACTIVE_halfInning, pitchResult, balls, strikes)

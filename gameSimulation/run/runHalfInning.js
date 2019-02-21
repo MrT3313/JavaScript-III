@@ -10,6 +10,8 @@ const runHalfInning = function () {
 
         // Run At Bat
         runAtBat()
+
+        // CHANGE BATTER
     } while (
         
     )
